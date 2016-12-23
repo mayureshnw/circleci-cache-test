@@ -1,18 +1,16 @@
 machine:
   services:
     - docker
+dependencies:
+  # we automatically cache and restore many dependencies between
+  # builds. If you need to, you can add custom paths to cache:
+
 
 dependencies:
   override:
-    - docker build -t willrstern/sample-node .
+    - npm install
+    - docker build -t mnw2212/circle-cache-test .
 
 test:
   override:
-    - docker run willrstern/sample-node npm test
-
-deployment:
-  production:
-    branch: master
-    commands:
-      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - ./deploy.sh
+    - echo "No tests"
